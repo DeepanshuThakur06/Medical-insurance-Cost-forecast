@@ -5,7 +5,8 @@
 )
 
 # 🏥 Medical Insurance Charges Prediction (Regression Project)
-<img width="1440" height="450" alt="image" src="https://github.com/user-attachments/assets/c92d000d-fb50-46b6-8c88-6346b730400a" />
+<img width="612" height="344" alt="image" src="https://github.com/user-attachments/assets/d9de6bf4-9ff3-4be8-b376-9107f342643f" />
+
 
 
 This project focuses on analyzing a Medical Insurance dataset and building a Machine Learning model to predict **insurance charges** based on customer details such as **age, BMI, number of children, sex, and smoking status**.  
