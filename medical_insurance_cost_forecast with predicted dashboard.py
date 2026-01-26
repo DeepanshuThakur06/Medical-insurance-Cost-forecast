@@ -211,123 +211,123 @@ joblib.dump(scaler, "scaler.pkl")
 joblib.dump(X.columns, "columns.pkl")
 
 # Commented out IPython magic to ensure Python compatibility.
-# %%writefile app.py
-# import streamlit as st
-# import pandas as pd
-# import numpy as np
-# import plotly.express as px
-# import joblib
-# 
-# st.set_page_config(page_title="Insurance Dashboard", layout="wide")
-# 
-# # -------------------- Load data + model --------------------
-# df = pd.read_csv("/content/drive/MyDrive/2026- Machine learning project/insurance.csv")
-# 
-# model = joblib.load("ridge_model.pkl")
-# scaler = joblib.load("scaler.pkl")
-# columns = joblib.load("columns.pkl")
-# 
-# # -------------------- Title --------------------
-# st.title("🏥 Insurance Charges Dashboard")
-# st.write("This dashboard provides insights and predicts insurance charges using a Ridge Regression model.")
-# 
-# # -------------------- Sidebar Filters --------------------
-# st.sidebar.header("📌 Filters (Dataset View)")
-# 
-# age_range = st.sidebar.slider(
-#     "Age Range",
-#     int(df["age"].min()), int(df["age"].max()),
-#     (18, 60)
-# )
-# 
-# smoker_filter = st.sidebar.selectbox("Smoker", ["All", "yes", "no"])
-# sex_filter = st.sidebar.selectbox("Sex", ["All", "male", "female"])
-# region_filter = st.sidebar.selectbox("Region", ["All"] + list(df["region"].unique()))
-# 
-# filtered_df = df[(df["age"] >= age_range[0]) & (df["age"] <= age_range[1])]
-# 
-# if smoker_filter != "All":
-#     filtered_df = filtered_df[filtered_df["smoker"] == smoker_filter]
-# 
-# if sex_filter != "All":
-#     filtered_df = filtered_df[filtered_df["sex"] == sex_filter]
-# 
-# if region_filter != "All":
-#     filtered_df = filtered_df[filtered_df["region"] == region_filter]
-# 
-# # -------------------- KPIs --------------------
-# st.subheader("📊 Key Metrics (Filtered Data)")
-# 
-# k1, k2, k3 = st.columns(3)
-# k1.metric("Total Records", filtered_df.shape[0])
-# k2.metric("Average Charges", round(filtered_df["charges"].mean(), 2))
-# k3.metric("Max Charges", round(filtered_df["charges"].max(), 2))
-# 
-# st.write("---")
-# 
-# # -------------------- Charts --------------------
-# c1, c2 = st.columns(2)
-# 
-# with c1:
-#     st.subheader("Charges Distribution")
-#     fig1 = px.histogram(filtered_df, x="charges", nbins=40)
-#     st.plotly_chart(fig1, use_container_width=True)
-# 
-# with c2:
-#     st.subheader("Charges by Smoker")
-#     fig2 = px.box(filtered_df, x="smoker", y="charges")
-#     st.plotly_chart(fig2, use_container_width=True)
-# 
-# st.subheader("Age vs Charges (Colored by Smoker)")
-# fig3 = px.scatter(filtered_df, x="age", y="charges", color="smoker", size="bmi", hover_data=["region"])
-# st.plotly_chart(fig3, use_container_width=True)
-# 
-# st.write("---")
-# 
-# # -------------------- Prediction Section --------------------
-# st.subheader("🤖 Predict Insurance Charges")
-# 
-# p1, p2, p3 = st.columns(3)
-# 
-# with p1:
-#     age = st.number_input("Age", min_value=18, max_value=100, value=30)
-#     bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=26.5)
-# 
-# with p2:
-#     children = st.number_input("Children", min_value=0, max_value=5, value=0)
-#     sex = st.selectbox("Sex", ["Female", "Male"])
-# 
-# with p3:
-#     smoker = st.selectbox("Smoker", ["No", "Yes"])
-# 
-# # Convert to model input format
-# sex_male = 1 if sex == "Male" else 0
-# smoker_yes = 1 if smoker == "Yes" else 0
-# 
-# # Button
-# if st.button("Predict Charges ✅"):
-#     new_data = pd.DataFrame({
-#         "age": [age],
-#         "bmi": [bmi],
-#         "children": [children],
-#         "sex_male": [sex_male],
-#         "smoker_yes": [smoker_yes]
-#     })
-# 
-#     new_data = new_data.reindex(columns=columns, fill_value=0)
-#     new_data_scaled = scaler.transform(new_data)
-# 
-#     pred_log = model.predict(new_data_scaled)
-#     pred_actual = np.exp(pred_log)
-# 
-#     st.success(f"✅ Predicted Insurance Charges: {pred_actual[0]:,.2f}")
-#     st.write("📝 Note: Prediction is transformed back from log(charges).")
-# 
-# st.write("---")
-# 
+%%writefile app.py
+import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import joblib
+
+st.set_page_config(page_title="Insurance Dashboard", layout="wide")
+
+# -------------------- Load data + model --------------------
+df = pd.read_csv("/content/drive/MyDrive/2026- Machine learning project/insurance.csv")
+
+model = joblib.load("ridge_model.pkl")
+scaler = joblib.load("scaler.pkl")
+columns = joblib.load("columns.pkl")
+
+# -------------------- Title --------------------
+st.title("🏥 Insurance Charges Dashboard")
+st.write("This dashboard provides insights and predicts insurance charges using a Ridge Regression model.")
+
+# -------------------- Sidebar Filters --------------------
+st.sidebar.header("📌 Filters (Dataset View)")
+
+age_range = st.sidebar.slider(
+    "Age Range",
+    int(df["age"].min()), int(df["age"].max()),
+    (18, 60)
+)
+
+smoker_filter = st.sidebar.selectbox("Smoker", ["All", "yes", "no"])
+sex_filter = st.sidebar.selectbox("Sex", ["All", "male", "female"])
+region_filter = st.sidebar.selectbox("Region", ["All"] + list(df["region"].unique()))
+
+filtered_df = df[(df["age"] >= age_range[0]) & (df["age"] <= age_range[1])]
+
+if smoker_filter != "All":
+    filtered_df = filtered_df[filtered_df["smoker"] == smoker_filter]
+
+if sex_filter != "All":
+    filtered_df = filtered_df[filtered_df["sex"] == sex_filter]
+
+if region_filter != "All":
+    filtered_df = filtered_df[filtered_df["region"] == region_filter]
+
+# -------------------- KPIs --------------------
+st.subheader("📊 Key Metrics (Filtered Data)")
+
+k1, k2, k3 = st.columns(3)
+k1.metric("Total Records", filtered_df.shape[0])
+k2.metric("Average Charges", round(filtered_df["charges"].mean(), 2))
+k3.metric("Max Charges", round(filtered_df["charges"].max(), 2))
+
+st.write("---")
+
+# -------------------- Charts --------------------
+c1, c2 = st.columns(2)
+
+with c1:
+    st.subheader("Charges Distribution")
+    fig1 = px.histogram(filtered_df, x="charges", nbins=40)
+    st.plotly_chart(fig1, use_container_width=True)
+
+with c2:
+    st.subheader("Charges by Smoker")
+    fig2 = px.box(filtered_df, x="smoker", y="charges")
+    st.plotly_chart(fig2, use_container_width=True)
+
+st.subheader("Age vs Charges (Colored by Smoker)")
+fig3 = px.scatter(filtered_df, x="age", y="charges", color="smoker", size="bmi", hover_data=["region"])
+st.plotly_chart(fig3, use_container_width=True)
+
+st.write("---")
+
+# -------------------- Prediction Section --------------------
+st.subheader("🤖 Predict Insurance Charges")
+
+p1, p2, p3 = st.columns(3)
+
+with p1:
+    age = st.number_input("Age", min_value=18, max_value=100, value=30)
+    bmi = st.number_input("BMI", min_value=10.0, max_value=50.0, value=26.5)
+
+with p2:
+    children = st.number_input("Children", min_value=0, max_value=5, value=0)
+    sex = st.selectbox("Sex", ["Female", "Male"])
+
+with p3:
+    smoker = st.selectbox("Smoker", ["No", "Yes"])
+
+# Convert to model input format
+sex_male = 1 if sex == "Male" else 0
+smoker_yes = 1 if smoker == "Yes" else 0
+
+# Button
+if st.button("Predict Charges ✅"):
+    new_data = pd.DataFrame({
+        "age": [age],
+        "bmi": [bmi],
+        "children": [children],
+        "sex_male": [sex_male],
+        "smoker_yes": [smoker_yes]
+    })
+
+    new_data = new_data.reindex(columns=columns, fill_value=0)
+    new_data_scaled = scaler.transform(new_data)
+
+    pred_log = model.predict(new_data_scaled)
+    pred_actual = np.exp(pred_log)
+
+    st.success(f"✅ Predicted Insurance Charges: {pred_actual[0]:,.2f}")
+    st.write("📝 Note: Prediction is transformed back from log(charges).")
+
+st.write("---")
+
 # # -------------------- Show Data --------------------
-# st.subheader("📌 Filtered Dataset")
-# st.dataframe(filtered_df)
+st.subheader("📌 Filtered Dataset")
+st.dataframe(filtered_df)
 #
 
 from pyngrok import ngrok
