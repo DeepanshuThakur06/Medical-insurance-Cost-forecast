@@ -1,8 +1,7 @@
 # Medical-insurance-Cost-forecast
 
 ## 🚀 Open in Google Colab
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1szmJ8ywh4xtXNyaC1XCGX2qFcorbk6DF?usp=sharing
-)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1szmJ8ywh4xtXNyaC1XCGX2qFcorbk6DF#scrollTo=LCAzyqB-O74R)
 
 # 🏥 Medical Insurance Charges Prediction (Regression Project)
 <img width="612" height="344" alt="image" src="https://github.com/user-attachments/assets/d9de6bf4-9ff3-4be8-b376-9107f342643f" />
