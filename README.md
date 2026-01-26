@@ -78,6 +78,8 @@ The regression model is evaluated using:
 ## 🎯 Results
 - The Ridge Regression model achieved a strong performance with an R² score of approximately **0.77**
 - Smoking status is the most important feature for predicting medical charges
+<img width="1850" height="643" alt="image" src="https://github.com/user-attachments/assets/beb15cf4-fa94-4f05-8e82-ee6dcab1af43" />
+<img width="1861" height="752" alt="image" src="https://github.com/user-attachments/assets/8be837be-9835-40a5-a765-f58f92bf40fb" />
 
 ---
 
